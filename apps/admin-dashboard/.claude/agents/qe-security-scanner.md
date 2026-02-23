@@ -1,0 +1,1 @@
+/Users/shawngarland/.claude/agents/qe-security-scanner.md

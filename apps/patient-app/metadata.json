@@ -1,0 +1,5 @@
+{
+  "name": "Eclipse Patient App",
+  "description": "Mobile-first patient experience for browsing inventory and tracking product effects.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,13 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import { CreateRoomPage } from "./pages/CreateRoomPage";
+import { RoomPage } from "./pages/RoomPage";
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<CreateRoomPage />} />
+      <Route path="/r/:roomId" element={<RoomPage />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}

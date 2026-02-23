@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="22" y="22" width="468" height="468" rx="10" fill="#0D0A0B"/>
+  <rect x="34" y="34" width="444" height="444" rx="6" fill="url(#bg)"/>
+
+  <circle cx="256" cy="236" r="38" fill="#C8286D"/>
+  <path d="M146 260C146 199 195 150 256 150C317 150 366 199 366 260" stroke="#F26A2E" stroke-width="24" stroke-linecap="round"/>
+  <path d="M126 260C126 188 184 130 256 130C328 130 386 188 386 260" stroke="#F6C2DA" stroke-width="18" stroke-linecap="round"/>
+  <path d="M166 260C166 210 206 170 256 170C306 170 346 210 346 260" stroke="#F4A124" stroke-width="20" stroke-linecap="round"/>
+
+  <g fill="#ECD7EA" stroke="#111" stroke-width="3">
+    <path d="M56 172C56 158 67 147 81 147C82 131 95 118 111 118C126 118 139 130 141 145C145 143 149 142 154 142C168 142 180 153 180 168V172H56Z"/>
+    <path d="M304 183C304 173 312 165 322 165C323 154 333 145 344 145C356 145 365 153 367 163C371 161 374 160 378 160C388 160 396 168 396 178V183H304Z"/>
+    <path d="M58 276C58 265 67 256 78 256C79 244 89 234 101 234C113 234 123 243 124 254C128 252 132 251 136 251C147 251 156 260 156 271V276H58Z"/>
+    <path d="M340 271C340 260 349 251 360 251C361 239 371 229 383 229C395 229 405 238 406 249C410 247 414 246 418 246C429 246 438 255 438 266V271H340Z"/>
+  </g>
+
+  <text x="256" y="331" text-anchor="middle" fill="#F4A124" stroke="#111" stroke-width="5" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="800" letter-spacing="2">ECLIPSE</text>
+  <text x="256" y="378" text-anchor="middle" fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" letter-spacing="3">CANNABIS</text>
+
+  <defs>
+    <linearGradient id="bg" x1="62" y1="62" x2="450" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4A124"/>
+      <stop offset="0.45" stop-color="#F26A2E"/>
+      <stop offset="0.72" stop-color="#E0457D"/>
+      <stop offset="1" stop-color="#7530C6"/>
+    </linearGradient>
+  </defs>
+</svg>

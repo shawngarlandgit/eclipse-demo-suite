@@ -1,0 +1,257 @@
+{
+  "name": "CannaConnect Cold Email Campaign",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Daily 9am Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": "public",
+        "table": "cold_email_prospects",
+        "limit": 50,
+        "where": {
+          "values": [
+            {
+              "column": "status",
+              "value": "active"
+            },
+            {
+              "column": "next_email_date",
+              "operator": "<=",
+              "value": "={{ $now.toISODate() }}"
+            }
+          ]
+        }
+      },
+      "id": "get-due-prospects",
+      "name": "Get Due Prospects",
+      "type": "n8n-nodes-base.supabase",
+      "position": [450, 300],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.email }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "has-email",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "position": [650, 300],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.email_sequence_position }}",
+              "operation": "equal",
+              "value2": 1
+            }
+          ]
+        }
+      },
+      "id": "is-email-1",
+      "name": "Email 1?",
+      "type": "n8n-nodes-base.switch",
+      "position": [850, 300],
+      "typeVersion": 2,
+      "outputs": ["Email 1", "Email 2", "Email 3", "Email 4", "Email 5"]
+    },
+    {
+      "parameters": {
+        "fromEmail": "shawn@cannaconnect.io",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Quick question about {{ $json.dispensary_name }}",
+        "emailType": "text",
+        "message": "Hey {{ $json.first_name }},\n\nQuick question — do you know what percentage of your first-time patients actually come back for a second visit?\n\nIndustry average is around 25%. Three out of four people who walk through your door never return.\n\nWe built a patient app specifically for Maine dispensaries that's helping operators like Jason at Hazy Moose turn that number around. His repeat visits are up 28% since launch.\n\nWould you be open to a 15-minute call to see if it'd work for {{ $json.dispensary_name }}?\n\n— Shawn\n\nP.S. No pitch deck, no demo unless you want one. Just a conversation about what's working."
+      },
+      "id": "send-email-1",
+      "name": "Send Email 1",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1100, 100],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "fromEmail": "shawn@cannaconnect.io",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Re: Quick question about {{ $json.dispensary_name }}",
+        "emailType": "text",
+        "message": "Hey {{ $json.first_name }},\n\nFollowing up — I know you're busy (probably reconciling METRC right now).\n\nOne thing we keep hearing from Maine operators: the amount of time spent on compliance busywork is insane. One owner told me she spends 15+ hours a week just making sure her numbers match.\n\nOur dashboard flags discrepancies automatically. Most operators cut that time in half within the first month.\n\nAnyway, not trying to flood your inbox. If you've got 15 minutes this week, I'd love to show you how it works.\n\n— Shawn"
+      },
+      "id": "send-email-2",
+      "name": "Send Email 2",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1100, 200],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "fromEmail": "shawn@cannaconnect.io",
+        "toEmail": "={{ $json.email }}",
+        "subject": "What Jason said about the patient app",
+        "emailType": "text",
+        "message": "Hey {{ $json.first_name }},\n\nLast one for a bit — just wanted to share what's actually happening with the operators using CannaConnect:\n\n**Hazy Moose (Sanford)**\n- 18 hours/week saved on ops overhead\n- 28% increase in repeat patient visits\n- 500+ active app users in 3 months\n\nThe patient app tracks what works for each person — strains, effects, dosages. Then it recommends products they'll actually like. Patients love it because it remembers what they forgot.\n\nIf any of this sounds useful for {{ $json.dispensary_name }}, let me know. Happy to walk through it.\n\n— Shawn"
+      },
+      "id": "send-email-3",
+      "name": "Send Email 3",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1100, 300],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "fromEmail": "shawn@cannaconnect.io",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Should I close your file?",
+        "emailType": "text",
+        "message": "Hey {{ $json.first_name }},\n\nI've reached out a few times and haven't heard back — totally get it, you're running a dispensary.\n\nI'll assume the timing isn't right and won't keep emailing.\n\nBut if you ever want to chat about:\n- Cutting METRC reconciliation time in half\n- Getting patients to actually come back\n- Automating the social media grind\n\nJust reply to this email. I'll be here.\n\n— Shawn"
+      },
+      "id": "send-email-4",
+      "name": "Send Email 4",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1100, 400],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "fromEmail": "shawn@cannaconnect.io",
+        "toEmail": "={{ $json.email }}",
+        "subject": "One last thing",
+        "emailType": "text",
+        "message": "Hey {{ $json.first_name }},\n\nClosing the loop — we put together a guide on the 3 things Maine dispensaries are doing to increase repeat visits without discounting.\n\nIt's free, no email capture required: https://cannaconnect.awakenedai.online/#get-started\n\nEven if we never work together, hope it's useful.\n\nBest,\nShawn"
+      },
+      "id": "send-email-5",
+      "name": "Send Email 5",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1100, 500],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": "public",
+        "table": "cold_email_prospects",
+        "id": "={{ $json.id }}",
+        "fields": {
+          "values": [
+            {
+              "column": "email_sequence_position",
+              "value": "={{ $json.email_sequence_position + 1 }}"
+            },
+            {
+              "column": "last_email_sent",
+              "value": "={{ $now.toISODate() }}"
+            },
+            {
+              "column": "next_email_date",
+              "value": "={{ $json.email_sequence_position == 1 ? $now.plus({ days: 2 }).toISODate() : $json.email_sequence_position == 2 ? $now.plus({ days: 3 }).toISODate() : $json.email_sequence_position == 3 ? $now.plus({ days: 4 }).toISODate() : $json.email_sequence_position == 4 ? $now.plus({ days: 4 }).toISODate() : null }}"
+            },
+            {
+              "column": "status",
+              "value": "={{ $json.email_sequence_position >= 5 ? 'completed' : 'active' }}"
+            }
+          ]
+        }
+      },
+      "id": "update-prospect",
+      "name": "Update Prospect",
+      "type": "n8n-nodes-base.supabase",
+      "position": [1350, 300],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": "public",
+        "table": "cold_email_logs",
+        "fields": {
+          "values": [
+            {
+              "column": "prospect_id",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "column": "email_number",
+              "value": "={{ $json.email_sequence_position }}"
+            },
+            {
+              "column": "sent_at",
+              "value": "={{ $now.toISO() }}"
+            },
+            {
+              "column": "subject",
+              "value": "={{ $json.subject }}"
+            }
+          ]
+        }
+      },
+      "id": "log-email",
+      "name": "Log Email Sent",
+      "type": "n8n-nodes-base.supabase",
+      "position": [1550, 300],
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "Daily 9am Check": {
+      "main": [
+        [
+          {
+            "node": "Get Due Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Due Prospects": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Email 1?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,11 @@
+<svg width="700" height="220" viewBox="0 0 700 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M350 22C295 22 251 66 251 120" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+  <path d="M350 37C306 37 271 75 271 118" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <path d="M350 51C315 51 287 83 287 116" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M350 22C405 22 449 66 449 120" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+  <path d="M350 37C394 37 429 75 429 118" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <path d="M350 51C385 51 413 83 413 116" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+
+  <text x="350" y="168" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700" letter-spacing="11">ECLIPSE</text>
+  <text x="350" y="198" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="8">CANNABIS COMPANY</text>
+</svg>

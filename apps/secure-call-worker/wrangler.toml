@@ -1,0 +1,20 @@
+name = "cannaconnect-secure-call-api"
+main = "src/index.ts"
+compatibility_date = "2026-02-09"
+
+# Durable Object that holds all room state + websocket signaling.
+[[durable_objects.bindings]]
+name = "SIGNALING"
+class_name = "Signaling"
+
+[[migrations]]
+tag = "v1"
+# Durable Objects now require SQLite-backed classes on Free plans.
+new_sqlite_classes = ["Signaling"]
+
+[vars]
+# Optional: set to require X-Admin-Key for POST /api/rooms
+ADMIN_KEY = ""
+
+# Comma-separated list of allowed origins. Use "*" to allow all (demo/dev).
+WEB_ORIGINS = "*"

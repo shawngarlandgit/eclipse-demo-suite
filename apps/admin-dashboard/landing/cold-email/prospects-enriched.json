@@ -1,0 +1,428 @@
+{
+  "prospects": [
+    {
+      "dispensaryName": "Limited Edition Farm",
+      "licenseNumber": "DSP",
+      "email": "info@midmainemarijuana.com",
+      "phone": "207-643-1033",
+      "website": "midmainemaijuana.com",
+      "city": "Solon",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "2 locations"
+    },
+    {
+      "dispensaryName": "Alternative Relief LLC",
+      "licenseNumber": "DSP175",
+      "city": "Portland",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "Need more research"
+    },
+    {
+      "dispensaryName": "JAR Cannabis Co (JAR CO Farms / JNP Services)",
+      "licenseNumber": "DSP145",
+      "website": "jarcannabis.com",
+      "city": "Lewiston/Windham",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "Multiple locations"
+    },
+    {
+      "dispensaryName": "Black Tie Cannabis LLC",
+      "licenseNumber": "DSP129",
+      "email": "nickbrigham08@gmail.com",
+      "phone": "207-933-8227",
+      "website": "blacktiecannabisme.com",
+      "city": "Greene",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Multiple license numbers"
+    },
+    {
+      "dispensaryName": "Blossom LLC",
+      "licenseNumber": "DSP111",
+      "email": "hello@blossommj.com",
+      "phone": "207-571-9471",
+      "website": "blossommj.com",
+      "city": "Saco/Biddeford",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Multiple locations"
+    },
+    {
+      "dispensaryName": "Cannabis Cured Dispensary LLC",
+      "licenseNumber": "DSP113",
+      "email": "wamoling@cannabiscured.com",
+      "phone": "978-732-8031",
+      "website": "cannabiscured.com",
+      "city": "Multiple",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "13 locations, Marketing Director"
+    },
+    {
+      "dispensaryName": "Curaleaf (Primary Organic Therapy)",
+      "licenseNumber": "DSP105",
+      "email": "justine@remedycompassioncenter.org",
+      "phone": "207-312-5798",
+      "website": "curaleaf.com",
+      "city": "Wells/Auburn/Bangor",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "5 ME locations total"
+    },
+    {
+      "dispensaryName": "Earth Keeper",
+      "licenseNumber": "DSP115",
+      "phone": "207-645-9900",
+      "website": "earthkeeperme.com",
+      "city": "Wilton/Winthrop/Dixfield",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "3 locations"
+    },
+    {
+      "dispensaryName": "Ellipse LLC",
+      "licenseNumber": "DSP221",
+      "email": "info@ellipsecannaco.com",
+      "phone": "207-333-5088",
+      "website": "ellipsecannaco.com",
+      "city": "Auburn",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Greenhouse grown"
+    },
+    {
+      "dispensaryName": "Faded Cannabis Company (FadedCC LLC)",
+      "licenseNumber": "DSP142",
+      "email": "crowsnestwindham@gmail.com",
+      "website": "fadedcannabis.io",
+      "city": "Windham",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ]
+    },
+    {
+      "dispensaryName": "Grove Cannabis Company LLC",
+      "licenseNumber": "DSP226",
+      "email": "info@grovecannabisco.com",
+      "phone": "207-475-4296",
+      "website": "grovecannabisco.com",
+      "city": "South Berwick",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ]
+    },
+    {
+      "dispensaryName": "Highbrow Industries LLC",
+      "licenseNumber": "DSP154",
+      "email": "contact@highbrowmaine.com",
+      "phone": "207-356-9377",
+      "website": "highbrowmaine.com",
+      "city": "Multiple",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "7 locations, also chris@highbrowmaine.com"
+    },
+    {
+      "dispensaryName": "Homegrown of Augusta",
+      "licenseNumber": "DSP121",
+      "email": "HG.Augusta@gmail.com",
+      "phone": "207-213-6443",
+      "website": "homegrownofaugusta.com",
+      "city": "Augusta",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ]
+    },
+    {
+      "dispensaryName": "Kind Farms Reserve (OpCo Med LLC)",
+      "licenseNumber": "DSP114",
+      "email": "kindfarmsreserve@gmail.com",
+      "phone": "207-715-3200",
+      "website": "kindfarmsreserve.com",
+      "city": "Berwick",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ]
+    },
+    {
+      "dispensaryName": "Maple Valley Pharms LLC",
+      "licenseNumber": "DSP135",
+      "phone": "207-859-3038",
+      "website": "maplevalleypharms.com",
+      "city": "Waterville",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ]
+    },
+    {
+      "dispensaryName": "MightyViking Inc",
+      "licenseNumber": "DSP179",
+      "email": "mightyvikinggummies@gmail.com",
+      "phone": "207-213-6420",
+      "website": "mightyviking.com",
+      "city": "Hallowell",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Best-selling medical gummy"
+    },
+    {
+      "dispensaryName": "Northeast Alliance LLC",
+      "licenseNumber": "DSP123",
+      "email": "northeastallianceoffice@gmail.com",
+      "phone": "207-800-0420",
+      "website": "northeastalliance.me",
+      "city": "Limerick/Portland",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Family owned"
+    },
+    {
+      "dispensaryName": "Northern Terps LLC",
+      "licenseNumber": "DSP153",
+      "phone": "207-391-0087",
+      "website": "northernterps.com",
+      "city": "Lewiston",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ]
+    },
+    {
+      "dispensaryName": "Origins Cannabis Company LLC",
+      "licenseNumber": "DSP128",
+      "email": "shop@originscannabis.com",
+      "phone": "207-624-2620",
+      "website": "originscannabis.com",
+      "city": "Manchester",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Home of Shwaggle Farms"
+    },
+    {
+      "dispensaryName": "Pot Pan Medical LLC",
+      "licenseNumber": "DSP132",
+      "phone": "888-768-0726",
+      "website": "potandpan.com",
+      "city": "Portland",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "Chef-crafted edibles"
+    },
+    {
+      "dispensaryName": "Rugged Roots LLC",
+      "licenseNumber": "DSP109",
+      "email": "dinah@ruggedrootsinc.com",
+      "website": "ruggedrootsinc.com",
+      "city": "Auburn/Portland",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Also brittni@ruggedrootsinc.com"
+    },
+    {
+      "dispensaryName": "Riverside Greenery LLC",
+      "licenseNumber": "DSP172",
+      "phone": "207-956-xxxx",
+      "website": "riversidegreenery.com",
+      "city": "Auburn",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ]
+    },
+    {
+      "dispensaryName": "Safe Alternatives",
+      "licenseNumber": "DSP104",
+      "phone": "207-492-2651",
+      "website": "safealternativesmaine.org",
+      "city": "Caribou",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "Only dispensary in Aroostook County"
+    },
+    {
+      "dispensaryName": "Seasmoke Extracts Inc",
+      "licenseNumber": "DSP213",
+      "email": "orders@seaweedmaine.com",
+      "phone": "207-239-2940",
+      "website": "seaweedmaine.com",
+      "city": "Auburn/South Portland",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Supplies SeaWeed Co."
+    },
+    {
+      "dispensaryName": "Stoner Co LLC",
+      "licenseNumber": "DSP152",
+      "phone": "207-423-6360",
+      "website": "stonerandco.com",
+      "city": "Biddeford/Waterville",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "2 locations"
+    },
+    {
+      "dispensaryName": "Top Notch Cannabis LLC",
+      "licenseNumber": "DSP181",
+      "email": "topnotchcannabis207@gmail.com",
+      "phone": "207-313-1496",
+      "website": "topnotchcannabis207.com",
+      "city": "Winslow",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "$5 full gram pre-rolls"
+    },
+    {
+      "dispensaryName": "Tops Farm York (York Dispensary LLC)",
+      "licenseNumber": "DSP119",
+      "email": "info@topsfarm.com",
+      "phone": "207-703-6162",
+      "website": "topsfarm.com",
+      "city": "York",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ]
+    },
+    {
+      "dispensaryName": "Upstate Gardens LLC",
+      "licenseNumber": "DSP158",
+      "phone": "207-241-7271",
+      "city": "Lewiston",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ]
+    },
+    {
+      "dispensaryName": "Brigid Cultivation LLC (The Farm Stand)",
+      "licenseNumber": "DSP150",
+      "email": "info@brigidfarm.com",
+      "phone": "207-571-9433",
+      "website": "brigidfarm.com",
+      "city": "Saco",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "10+ years experience, vertically integrated"
+    },
+    {
+      "dispensaryName": "Zero Gravity Cannabis (Cosmic Solutions LLC)",
+      "licenseNumber": "DSP165",
+      "phone": "207-571-9096",
+      "website": "zerogravitycannabis.com",
+      "city": "Saco",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ],
+      "notes": "30+ years experience"
+    },
+    {
+      "dispensaryName": "Fishbowl Farms LLC",
+      "licenseNumber": "DSP189",
+      "email": "fishbowlfarm@gmail.com",
+      "website": "fishbowlfarm.com",
+      "city": "Bowdoinham",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "ready"
+      ],
+      "notes": "Organic certified farm"
+    },
+    {
+      "dispensaryName": "Coastal Calyx LLC",
+      "licenseNumber": "DSP238",
+      "source": "google_sheets_enriched",
+      "tags": [
+        "enriched",
+        "pending_research"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 32,
+    "readyToContact": 20,
+    "needsResearch": 12,
+    "withEmail": 20,
+    "withPhone": 26,
+    "withWebsite": 29
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "cannabis-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unified cannabis demo suite monorepo (patient, driver, dispatch, medcard, secure call)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:admin": "npm run dev -w apps/admin-dashboard",
+    "dev:patient": "npm run dev -w apps/patient-app",
+    "dev:driver": "npm run dev -w apps/driver-app",
+    "dev:dispatch": "npm run dev -w apps/dispatch-standalone",
+    "dev:core": "concurrently -k -n patient,driver,dispatch -c magenta,cyan,yellow \"npm run dev -w apps/patient-app\" \"npm run dev -w apps/driver-app\" \"npm run dev -w apps/dispatch-standalone\"",
+    "dev:medcard:app": "npm run dev -w apps/medcard-standalone",
+    "dev:secure-call:server": "npm run dev -w apps/secure-call-server",
+    "dev:secure-call:web": "npm run dev -w apps/secure-call-web",
+    "dev:secure-call": "concurrently -k -n server,web -c cyan,green \"npm run dev -w apps/secure-call-server\" \"npm run dev -w apps/secure-call-web\"",
+    "dev:kiosk": "npm run dev -w apps/kiosk",
+    "dev:medcard": "concurrently -k -n medcard,signal,web,kiosk -c magenta,cyan,green,yellow \"npm run dev -w apps/medcard-standalone\" \"npm run dev -w apps/secure-call-server\" \"npm run dev -w apps/secure-call-web\" \"npm run dev -w apps/kiosk\"",
+    "dev:convex": "npx convex dev",
+    "build": "npm run build --workspaces --if-present",
+    "build:admin": "npm run build -w apps/admin-dashboard",
+    "build:patient": "npm run build -w apps/patient-app",
+    "build:driver": "npm run build -w apps/driver-app",
+    "build:dispatch": "npm run build -w apps/dispatch-standalone",
+    "build:medcard:app": "npm run build -w apps/medcard-standalone",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "convex": "^1.31.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawngarlandgit/cannabis-platform.git"
+  },
+  "keywords": [
+    "cannabis",
+    "dispensary",
+    "delivery",
+    "dispatch",
+    "medcard",
+    "secure-call"
+  ],
+  "author": "Awakened Industries",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

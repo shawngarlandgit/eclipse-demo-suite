@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CannaConnect - All-in-one Cannabis Dispensary Platform</title>
+    <meta name="description" content="Cannabis-native platform for operations, compliance, patient loyalty, and media. Built for multi-location dispensaries ready to move beyond POS-only tools.">
+    <meta property="og:title" content="CannaConnect - All-in-one Cannabis Dispensary Platform">
+    <meta property="og:description" content="Unify operations, compliance, patient loyalty, and content into one cannabis-native platform.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cannaconnect.me/">
+    <meta property="og:url" content="https://cannaconnect.me">
+    <meta property="og:image" content="https://cannaconnect.me/images/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CannaConnect",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "All-in-one cannabis dispensary platform for operations, compliance, patient loyalty, and media. Built for Maine dispensaries.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "1000",
+        "highPrice": "5500",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Shawn Garland"
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Umami Analytics -->
+    <script defer src="https://analytics.awakenedindustries.me/script.js" data-website-id="b29d8ccf-fdcb-43ef-a472-e69cf3dca667"></script>
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-surface: #12121a;
+            --bg-elevated: #1a1a25;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --bg-glass-hover: rgba(255, 255, 255, 0.06);
+            --accent-primary: #2db87c;
+            --accent-secondary: #00d4ff;
+            --accent-tertiary: #a855f7;
+            --gradient-start: #2db87c;
+            --gradient-mid: #00d4ff;
+            --gradient-end: #a855f7;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(45, 184, 124, 0.3);
+            --glow-green: rgba(45, 184, 124, 0.15);
+            --glow-blue: rgba(0, 212, 255, 0.1);
+            --glow-purple: rgba(168, 85, 247, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 { font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+        h3 { font-size: clamp(24px, 3vw, 32px); font-weight: 600; line-height: 1.3; }
+        h4 { font-size: 20px; font-weight: 600; line-height: 1.4; }
+
+        /* Accent Text (solid colors - no gradients) */
+        .text-accent {
+            color: var(--accent-primary);
+        }
+
+        .text-accent-green {
+            color: var(--accent-primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 60px var(--glow-green);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px var(--glow-green);
+        }
+
+        .logo-mark svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-primary), #25a36d);
+            color: var(--bg-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--glow-green);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Glow Effects */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(ellipse at center, var(--glow-green) 0%, transparent 60%);
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(ellipse at center, var(--glow-blue) 0%, transparent 60%);
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .hero-text h1 {
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 span {
+            display: block;
+        }
+
+        .hero-text .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), #25a36d);
+            color: var(--bg-primary);
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--glow-green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--glow-green);
+        }
+
+        .btn-secondary {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .trust-section {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .trust-line {
+            color: var(--text-tertiary);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .trust-logos {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .trust-logos span {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            padding: 10px 20px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .trust-logos span:hover {
+            border-color: var(--border-glow);
+            color: var(--text-secondary);
+        }
+
+        /* Dashboard Screenshot */
+        .hero-visual {
+            position: relative;
+            opacity: 0;
+            transform: translateX(40px);
+        }
+
+        .dashboard-screenshot {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 80px var(--glow-green);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transition: all 0.5s ease;
+        }
+
+        .dashboard-screenshot:hover {
+            transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
+        }
+
+        .dashboard-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(-5deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Problem Section */
+        #problems {
+            background: var(--bg-surface);
+            position: relative;
+        }
+
+        #problems::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .problem-card {
+            padding: 32px;
+        }
+
+        .problem-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 77, 79, 0.1);
+            border: 1px solid rgba(255, 77, 79, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .problem-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #ff4d4f;
+        }
+
+        .problem-card h4 {
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Features Section */
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-block:last-child {
+            border-bottom: none;
+        }
+
+        .feature-block:nth-child(even) .feature-content {
+            order: 2;
+        }
+
+        .feature-block:nth-child(even) .feature-visual {
+            order: 1;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--glow-green), var(--glow-blue));
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 30px var(--glow-green);
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--accent-primary);
+        }
+
+        .feature-content h3 {
+            margin-bottom: 16px;
+        }
+
+        .feature-content > p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .feature-list li svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent-primary);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .feature-visual {
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, var(--glow-green) 0%, transparent 70%);
+            opacity: 0.3;
+        }
+
+        .feature-screenshot {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-visual:hover .feature-screenshot {
+            transform: scale(1.02);
+        }
+
+        /* Integrations Section */
+        #integrations {
+            padding: 80px 0;
+        }
+
+        .integration-logos .glass-card {
+            transition: all 0.3s ease;
+        }
+
+        .integration-logos .glass-card:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        #about {
+            padding: 80px 0;
+            background: var(--bg-surface);
+        }
+
+        .founder-card {
+            border-color: var(--border-glow);
+        }
+
+        .founder-card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Pricing Section */
+        #pricing {
+            background: var(--bg-surface);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .pricing-card {
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            background: linear-gradient(180deg, rgba(45, 184, 124, 0.08) 0%, var(--bg-glass) 100%);
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(45, 184, 124, 0.2);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--bg-primary);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .pricing-tier {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .pricing-label {
+            color: var(--text-tertiary);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .pricing-price {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .pricing-setup {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent-primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* Testimonial Section */
+        #testimonial {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #testimonial::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse at center, var(--glow-green) 0%, transparent 60%);
+            filter: blur(100px);
+            opacity: 0.5;
+        }
+
+        .testimonial-card {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 36px;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 120px;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -40px;
+            left: -30px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 36px;
+        }
+
+        .testimonial-author span {
+            color: var(--text-tertiary);
+            font-weight: 400;
+        }
+
+        .testimonial-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .stat-badge:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .stat-badge strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* ROI Section */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .roi-card {
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .roi-value {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .roi-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Counter Animation */
+        .counter {
+            display: inline-block;
+        }
+
+        /* Timeline Section */
+        #timeline {
+            background: var(--bg-surface);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 28px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg-surface);
+            box-shadow: 0 0 20px var(--glow-green);
+        }
+
+        .timeline-phase {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content h4 {
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-category {
+            margin-bottom: 40px;
+        }
+
+        .faq-category-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-glow);
+        }
+
+        .faq-question svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-tertiary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question {
+            border-color: var(--accent-primary);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px 24px;
+            max-height: 300px;
+        }
+
+        /* Bottom CTA */
+        .bottom-cta {
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bottom-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--glow-green) 0%, transparent 50%);
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .bottom-cta > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bottom-cta h2 {
+            margin-bottom: 20px;
+        }
+
+        .bottom-cta p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bottom-cta .hero-ctas {
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 999;
+            padding: 24px;
+            flex-direction: column;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 24px;
+        }
+
+        .mobile-nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        /* Demo Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal h3 {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--glow-green);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .modal-close {
+            flex: 1;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-glass-hover);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-tertiary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+        }
+
+        .scroll-indicator .mouse {
+            width: 24px;
+            height: 40px;
+            border: 2px solid var(--text-tertiary);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-indicator .wheel {
+            width: 4px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.3; transform: translateX(-50%) translateY(12px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text .subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .trust-logos {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .problem-grid,
+            .pricing-grid,
+            .roi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-block:nth-child(even) .feature-content,
+            .feature-block:nth-child(even) .feature-visual {
+                order: unset;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .problem-grid,
+            .pricing-grid,
+            .roi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: row;
+                padding-left: 50px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .testimonial-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Maine Data Intelligence Section */
+        #maine-data {
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #maine-data::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--glow-green) 0%, transparent 50%);
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .maine-data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .maine-card {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .maine-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .maine-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .maine-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .maine-icon.market {
+            background: rgba(45, 184, 124, 0.15);
+            border: 1px solid rgba(45, 184, 124, 0.3);
+        }
+
+        .maine-icon.market svg {
+            stroke: var(--accent-primary);
+        }
+
+        .maine-icon.compliance {
+            background: rgba(255, 170, 0, 0.15);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+        }
+
+        .maine-icon.compliance svg {
+            stroke: #ffaa00;
+        }
+
+        .maine-icon.verify {
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .maine-icon.verify svg {
+            stroke: var(--accent-secondary);
+        }
+
+        .maine-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(45, 184, 124, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(45, 184, 124, 0.3);
+        }
+
+        .maine-badge.warning {
+            background: rgba(255, 170, 0, 0.15);
+            color: #ffaa00;
+            border-color: rgba(255, 170, 0, 0.3);
+        }
+
+        .maine-badge.success {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent-secondary);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .maine-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .maine-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Market Stats */
+        .maine-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .maine-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-glass);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .maine-stat .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .maine-stat .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-align: right;
+        }
+
+        /* Compliance Preview */
+        .compliance-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg-glass);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .compliance-action {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .compliance-action.revoked {
+            background: rgba(255, 77, 79, 0.15);
+            color: #ff4d4f;
+        }
+
+        .compliance-action.suspended {
+            background: rgba(255, 170, 0, 0.15);
+            color: #ffaa00;
+        }
+
+        .compliance-action.fined {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-tertiary);
+        }
+
+        .compliance-reg {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .compliance-date {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* License Verifier Preview */
+        .verify-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .verify-input-fake {
+            display: flex;
+            align-items: center;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .verify-placeholder {
+            flex: 1;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .verify-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--accent-secondary), #00a8cc);
+            color: var(--bg-primary);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .verify-result {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(45, 184, 124, 0.08);
+            border: 1px solid rgba(45, 184, 124, 0.2);
+            border-radius: 8px;
+        }
+
+        .verify-status {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .verify-status.active {
+            background: rgba(45, 184, 124, 0.2);
+            color: var(--accent-primary);
+        }
+
+        .verify-info {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .verify-exp {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .maine-data-cta {
+            text-align: center;
+            margin-top: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .maine-data-cta p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .maine-data-cta strong {
+            color: var(--accent-primary);
+        }
+
+        @media (max-width: 1024px) {
+            .maine-data-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                CannaConnect
+            </a>
+            <ul class="nav-links">
+                <li><a href="#maine-data">Maine Data</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#timeline">How It Works</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <a href="#" class="nav-cta" onclick="openModal(); return false;">Start Free Pilot</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">CannaConnect</a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#maine-data" onclick="toggleMobileMenu()">Maine Data</a></li>
+            <li><a href="#features" onclick="toggleMobileMenu()">Features</a></li>
+            <li><a href="#pricing" onclick="toggleMobileMenu()">Pricing</a></li>
+            <li><a href="#timeline" onclick="toggleMobileMenu()">How It Works</a></li>
+            <li><a href="#faq" onclick="toggleMobileMenu()">FAQ</a></li>
+        </ul>
+        <a href="#" class="btn-primary" onclick="openModal(); toggleMobileMenu(); return false;">Start Free Pilot</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span>The all-in-one platform for</span>
+                        <span class="text-accent">serious dispensary operators</span>
+                    </h1>
+                    <p class="subtitle">Unify operations, compliance, patient loyalty, and content into one cannabis-native platform built for multi-location dispensaries.</p>
+                    <div class="hero-ctas">
+                        <a href="#" class="btn-primary" onclick="openModal(); return false;">
+                            Start Free 90-Day Pilot
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#features" class="btn-secondary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            See Features
+                        </a>
+                    </div>
+                    <div class="trust-section">
+                        <p class="trust-line">Now accepting pilot partners</p>
+                        <div class="trust-logos">
+                            <span>Free 90-day pilot</span>
+                            <span>No contract required</span>
+                            <span>Maine-focused</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual floating">
+                    <div class="dashboard-screenshot">
+                        <img src="screenshot-dashboard.png?v=4" alt="CannaConnect Dashboard - Dispensary management platform" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problems">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Sound <span class="text-accent">familiar?</span></h2>
+                <p>Most dispensaries are stuck in operational chaos while trying to grow.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card glass-card stagger-item">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h4>Drowning in manual work</h4>
+                    <p>Inventory spreadsheets, METRC exports, and "Who changed this?" conversations every week.</p>
+                </div>
+                <div class="problem-card glass-card stagger-item">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h4>One-and-done customers</h4>
+                    <p>Up to 75% of customers never return because nothing helps them remember what worked.</p>
+                </div>
+                <div class="problem-card glass-card stagger-item">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M3 9h18M9 21V9"/>
+                        </svg>
+                    </div>
+                    <h4>Five tools, zero strategy</h4>
+                    <p>Weedmaps, POS reports, Mailchimp, Canva, random contractors - no single source of truth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maine Data Intelligence Section -->
+    <section id="maine-data">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Real-time <span class="text-accent">Maine compliance</span> intelligence</h2>
+                <p>We ingest all public OCP data daily, secured with industry-standard encryption and access controls. Always know what's happening in your market.</p>
+            </div>
+
+            <div class="maine-data-grid">
+                <!-- Market Stats -->
+                <div class="maine-card glass-card stagger-item">
+                    <div class="maine-card-header">
+                        <div class="maine-icon market">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                            </svg>
+                        </div>
+                        <span class="maine-badge">Live Data</span>
+                    </div>
+                    <h4>Maine Market Overview</h4>
+                    <p class="maine-desc">Real-time market intelligence from official OCP sources.</p>
+                    <div class="maine-stats">
+                        <div class="maine-stat">
+                            <span class="stat-value">$323M+</span>
+                            <span class="stat-label">2025 Total Sales (YTD)</span>
+                        </div>
+                        <div class="maine-stat">
+                            <span class="stat-value">775</span>
+                            <span class="stat-label">Licensed Medical Dispensaries</span>
+                        </div>
+                        <div class="maine-stat">
+                            <span class="stat-value">3,200+</span>
+                            <span class="stat-label">Registered Caregivers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Feed -->
+                <div class="maine-card glass-card stagger-item">
+                    <div class="maine-card-header">
+                        <div class="maine-icon compliance">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <span class="maine-badge warning">118 Tracked</span>
+                    </div>
+                    <h4>Compliance Violation Feed</h4>
+                    <p class="maine-desc">Know when OCP takes enforcement action - before your suppliers tell you.</p>
+                    <div class="compliance-preview">
+                        <div class="compliance-item">
+                            <span class="compliance-action revoked">Revoked</span>
+                            <span class="compliance-reg">CGR•••••</span>
+                            <span class="compliance-date">Jan 2025</span>
+                        </div>
+                        <div class="compliance-item">
+                            <span class="compliance-action suspended">Suspended</span>
+                            <span class="compliance-reg">CGE•••••</span>
+                            <span class="compliance-date">Dec 2024</span>
+                        </div>
+                        <div class="compliance-item">
+                            <span class="compliance-action fined">Fined $5,000</span>
+                            <span class="compliance-reg">DSP•••</span>
+                            <span class="compliance-date">Nov 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- License Verifier -->
+                <div class="maine-card glass-card stagger-item">
+                    <div class="maine-card-header">
+                        <div class="maine-icon verify">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </div>
+                        <span class="maine-badge success">Instant</span>
+                    </div>
+                    <h4>License Verification</h4>
+                    <p class="maine-desc">Verify any Maine cannabis license in seconds. Know who you're doing business with.</p>
+                    <div class="verify-preview">
+                        <div class="verify-input-fake">
+                            <span class="verify-placeholder">CGR12345</span>
+                            <span class="verify-btn">Verify</span>
+                        </div>
+                        <div class="verify-result">
+                            <span class="verify-status active">Active</span>
+                            <span class="verify-info">Medical Caregiver • Portland</span>
+                            <span class="verify-exp">Expires: Dec 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="maine-data-cta reveal">
+                <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+                    <span class="glass-card" style="padding: 12px 20px; font-size: 13px;">
+                        <span style="color: var(--accent-primary);">●</span> 256-bit encryption
+                    </span>
+                    <span class="glass-card" style="padding: 12px 20px; font-size: 13px;">
+                        <span style="color: var(--accent-primary);">●</span> Security-first architecture
+                    </span>
+                    <span class="glass-card" style="padding: 12px 20px; font-size: 13px;">
+                        <span style="color: var(--accent-primary);">●</span> Maine-hosted data
+                    </span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 16px;">
+                    Your dispensary data never leaves secure infrastructure. <strong style="color: var(--accent-primary);">Zero third-party data sharing.</strong>
+                </p>
+                <p>Powered by official Maine OCP data, updated monthly. <strong>Free for all CannaConnect clients.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Everything you need, <span class="text-accent">unified</span></h2>
+                <p>One platform that handles operations, loyalty, content, and growth.</p>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content reveal-left">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M3 9h18M9 21V9"/>
+                        </svg>
+                    </div>
+                    <h3>Operations Dashboard</h3>
+                    <p>Real-time visibility across all locations with compliance built in.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Real-time inventory across all locations
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Automatic METRC checks and alerts
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Daily, weekly, and monthly compliance reports
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Demand forecasting to cut stockouts
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual glass-card reveal-right">
+                    <img src="screenshot-dashboard.png?v=4" alt="Operations Dashboard" class="feature-screenshot" loading="lazy">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content reveal-left">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Patient Community App</h3>
+                    <p>Turn one-time buyers into loyal patients with personalized experiences.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Effects tracking so patients remember what worked
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Smart recommendations based on real data
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Loyalty tiers, rewards, and gamification
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            One-tap reorders and cross-location pickup
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual glass-card reveal-right">
+                    <img src="screenshot-dashboard.png?v=4" alt="Patient Community App" class="feature-screenshot" loading="lazy">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content reveal-left">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Content Automation</h3>
+                    <p>Consistent, compliant content without the marketing agency fees.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            4 cannabis-compliant social posts per week
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Weekly or bi-weekly newsletters
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Auto-screened content to avoid shadowbans
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Own your audience: email + app, not marketplaces
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual glass-card reveal-right">
+                    <img src="screenshot-dashboard.png?v=4" alt="Content Automation" class="feature-screenshot" loading="lazy">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content reveal-left">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <polygon points="23 7 16 12 23 17 23 7"/>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                        </svg>
+                    </div>
+                    <h3>Media & Podcast Studio <span style="font-size: 0.6em; color: #10b981; font-weight: 500;">(Coming Soon)</span></h3>
+                    <p>Professional media production for brands ready to dominate their market.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Bi-weekly video podcast production
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Monthly live shopping events
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Professional photography of products and team
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Clips and content you can reuse everywhere
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual glass-card reveal-right">
+                    <img src="screenshot-dashboard.png?v=4" alt="Media & Podcast Studio" class="feature-screenshot" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section id="integrations">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Works with your <span class="text-accent">existing stack</span></h2>
+                <p>Built to integrate with the POS systems Maine dispensaries actually use.</p>
+            </div>
+            <div class="integration-logos" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">METRC</span>
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">Dutchie</span>
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">Treez</span>
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">Flowhub</span>
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">Jane</span>
+                <span class="glass-card" style="padding: 16px 24px; font-weight: 500;">Cova</span>
+            </div>
+            <p style="text-align: center; color: var(--text-tertiary); margin-top: 24px; font-size: 14px;">
+                Don't see your POS? We're adding integrations based on pilot partner needs.
+            </p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Built by someone who <span class="text-accent">gets it</span></h2>
+            </div>
+            <div class="founder-card glass-card reveal" style="max-width: 700px; margin: 0 auto; padding: 40px; text-align: center;">
+                <h4 style="margin-bottom: 8px;">Shawn Garland</h4>
+                <p style="color: var(--accent-primary); font-size: 14px; font-weight: 600; margin-bottom: 16px;">Founder & Developer</p>
+                <p style="color: var(--text-secondary); line-height: 1.7;">
+                    8+ years in enterprise software deployment at Tyler Technologies, specializing in compliance systems and municipal licensing.
+                    Built CannaConnect to solve the fragmentation problem Maine dispensaries face — too many tools, no single source of truth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Simple, <span class="text-accent">transparent</span> pricing</h2>
+                <p>Choose the tier that matches your growth stage. All include a free 90-day pilot.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card glass-card stagger-item">
+                    <div class="pricing-tier">Essential</div>
+                    <h4>Single Location</h4>
+                    <p class="pricing-label">For single-location operators</p>
+                    <div class="pricing-price">$1,000<span>/month</span></div>
+                    <p class="pricing-setup">$3,000 implementation</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Operations dashboard
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            METRC monitoring & reports
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Patient app (core features)
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Basic loyalty & messaging
+                        </li>
+                    </ul>
+                    <a href="#" class="btn-secondary pricing-cta" onclick="openModal(); return false;">Start Pilot</a>
+                </div>
+
+                <div class="pricing-card glass-card featured stagger-item">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-tier">Specialist</div>
+                    <h4>Multi-Location</h4>
+                    <p class="pricing-label">For multi-location dispensaries</p>
+                    <div class="pricing-price">$2,500<span>/month</span></div>
+                    <p class="pricing-setup">$6,500 implementation</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Everything in Essential
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Advanced patient app + effects tracking
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Smart recommendations & gamified loyalty
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Content automation + podcast
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Merch integration
+                        </li>
+                    </ul>
+                    <a href="#" class="btn-primary pricing-cta" onclick="openModal(); return false;">Start Pilot</a>
+                </div>
+
+                <div class="pricing-card glass-card stagger-item">
+                    <div class="pricing-tier">Studio</div>
+                    <h4>Media-First</h4>
+                    <p class="pricing-label">For media-first brands</p>
+                    <div class="pricing-price">$5,500<span>/month</span></div>
+                    <p class="pricing-setup">$8,500 implementation</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Everything in Specialist
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Bi-weekly pro podcast
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Monthly live shopping events
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Photo & video content library
+                        </li>
+                    </ul>
+                    <a href="#" class="btn-secondary pricing-cta" onclick="openModal(); return false;">Talk to Sales</a>
+                </div>
+
+                <div class="pricing-card glass-card stagger-item">
+                    <div class="pricing-tier">Enterprise</div>
+                    <h4>Regional Chains</h4>
+                    <p class="pricing-label">For regional chains & MSOs</p>
+                    <div class="pricing-price">Custom</div>
+                    <p class="pricing-setup">From $12,000+ implementation</p>
+                    <ul class="pricing-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Everything in Studio
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Multi-state compliance
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            White-label app and portal
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Custom data and integrations
+                        </li>
+                    </ul>
+                    <a href="#" class="btn-secondary pricing-cta" onclick="openModal(); return false;">Schedule Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maine Market Stats Section -->
+    <section id="maine-stats">
+        <div class="container">
+            <div class="testimonial-card reveal">
+                <p class="testimonial-quote" style="font-size: clamp(18px, 2.5vw, 24px);">Maine's medical cannabis program serves over <strong style="color: var(--accent-primary);">100,000 registered patients</strong> through a network of licensed dispensaries and caregivers - one of the most accessible programs in the nation.</p>
+                <p class="testimonial-author">Maine Office of Cannabis Policy <span>(2025 Data)</span></p>
+                <div class="testimonial-stats">
+                    <div class="stat-badge"><strong>$161M+</strong> Medical Sales (2024)</div>
+                    <div class="stat-badge"><strong>775</strong> Licensed Dispensaries</div>
+                    <div class="stat-badge"><strong>3,200+</strong> Active Caregivers</div>
+                    <div class="stat-badge"><strong>118</strong> Compliance Actions Tracked</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section id="roi">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>The ROI speaks <span class="text-accent">for itself</span></h2>
+                <p>Typical results from Specialist-tier clients after 90 days.</p>
+            </div>
+            <div class="roi-grid">
+                <div class="roi-card glass-card stagger-item">
+                    <div class="roi-value text-accent-green"><span class="counter" data-target="20">0</span>+ hrs</div>
+                    <div class="roi-label">Weekly time saved on operations</div>
+                </div>
+                <div class="roi-card glass-card stagger-item">
+                    <div class="roi-value text-accent-green">~<span class="counter" data-target="28">0</span>%</div>
+                    <div class="roi-label">Higher repeat customer rate</div>
+                </div>
+                <div class="roi-card glass-card stagger-item">
+                    <div class="roi-value text-accent-green"><span class="counter" data-target="4">0</span>x</div>
+                    <div class="roi-label">More consistent content output</div>
+                </div>
+                <div class="roi-card glass-card stagger-item">
+                    <div class="roi-value text-accent-green">$<span class="counter" data-target="22">0</span>K</div>
+                    <div class="roi-label">Net annual value after costs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Your <span class="text-accent">90-day</span> pilot roadmap</h2>
+                <p>A structured implementation that proves value before you commit.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-phase">Week 1-2</div>
+                        <h4>Foundation & Compliance</h4>
+                        <p>Setup platform, connect POS, configure METRC, train core staff.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-phase">Week 3-4</div>
+                        <h4>Patient App & Content Live</h4>
+                        <p>Launch patient app, configure loyalty, start scheduled content.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item reveal-left">
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-phase">Week 5-8</div>
+                        <h4>Adoption & Optimization</h4>
+                        <p>Grow app users, tune notifications, refine recommendations.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item reveal-right">
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-phase">Week 9-12</div>
+                        <h4>Measured ROI</h4>
+                        <p>Review repeat rate, time saved, AOV changes; decide on full rollout.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Frequently asked <span class="text-accent">questions</span></h2>
+                <p>Everything you need to know about getting started.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-category stagger-item">
+                    <div class="faq-category-title">Pricing & Contracts</div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            Is there a long-term contract?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">No long-term contracts. After your 90-day pilot, you can continue month-to-month or commit to an annual plan for a 15% discount. You can cancel with 30 days notice.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            What about implementation fees?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">Implementation fees are split into milestone payments tied to deliverables, so you only pay as value is delivered. If we don't hit a milestone, you don't pay for it.</div>
+                    </div>
+                </div>
+
+                <div class="faq-category stagger-item">
+                    <div class="faq-category-title">Integrations & Tech</div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            Do you replace our POS?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">No. We integrate with your existing POS (Flowhub, Dutchie, Treez, etc.) rather than replacing it. We sit on top and unify data across systems.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            Which POS systems do you support?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">We currently support Flowhub, Dutchie, Treez, Cova, and Blaze. If you use a different POS, let us know - we can usually add support within 2-4 weeks.</div>
+                    </div>
+                </div>
+
+                <div class="faq-category stagger-item">
+                    <div class="faq-category-title">Compliance & Security</div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            How do you handle METRC?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">We integrate directly with METRC via API to monitor compliance, generate reports, and alert you to potential issues before they become violations.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            Who owns the data?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">You do. Your data is yours, always. We never sell or share your data. You can export everything at any time, and we delete it within 30 days if you leave.</div>
+                    </div>
+                </div>
+
+                <div class="faq-category stagger-item">
+                    <div class="faq-category-title">Onboarding & Support</div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            How much work is this for my team?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">Minimal. We handle 90% of the setup. You'll need about 4-6 hours total from your team during the first two weeks for training and feedback sessions.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            What support do we get?
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-answer">All tiers include email and chat support with same-day response. Specialist and above get a dedicated success manager and priority phone support.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="bottom-cta">
+        <div class="container">
+            <h2 class="reveal">Ready to see CannaConnect <span class="text-accent">in action?</span></h2>
+            <p class="reveal">Book a 15-minute fit call or start a free 90-day pilot if we're a match.</p>
+            <div class="hero-ctas reveal">
+                <a href="#" class="btn-primary" onclick="openModal(); return false;">Request Demo</a>
+                <a href="#" class="btn-secondary" onclick="openModal(); return false;">Schedule Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="logo">
+                    <div class="logo-mark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    CannaConnect
+                </a>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="mailto:hello@cannaconnect.me">Contact</a>
+                </div>
+                <p class="footer-copy">2026 CannaConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h3>Start Your <span class="text-accent">Free Pilot</span></h3>
+            <form id="demoForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Smith" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" placeholder="john@dispensary.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="dispensary">Dispensary Name</label>
+                    <input type="text" id="dispensary" name="dispensary" placeholder="Green Valley Dispensary" required>
+                </div>
+                <div class="form-group">
+                    <label for="locations">Number of Locations</label>
+                    <select id="locations" name="locations" required>
+                        <option value="">Select...</option>
+                        <option value="1">1 location</option>
+                        <option value="2-5">2-5 locations</option>
+                        <option value="6-10">6-10 locations</option>
+                        <option value="10+">10+ locations</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary modal-close" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Request Pilot</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initial animations on page load
+        window.addEventListener('load', () => {
+            // Nav animation
+            gsap.to('nav', {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+
+            // Hero text animation
+            gsap.to('.hero-text', {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.5
+            });
+
+            // Trust section animation
+            gsap.to('.trust-section', {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: 0.8
+            });
+
+            // Hero visual animation
+            gsap.to('.hero-visual', {
+                x: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.7
+            });
+
+            // Scroll indicator
+            gsap.to('.scroll-indicator', {
+                opacity: 1,
+                duration: 0.5,
+                delay: 1.5
+            });
+        });
+
+        // Scroll-triggered animations
+        gsap.utils.toArray('.reveal').forEach(elem => {
+            gsap.fromTo(elem,
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.reveal-left').forEach(elem => {
+            gsap.fromTo(elem,
+                { x: -40, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.reveal-right').forEach(elem => {
+            gsap.fromTo(elem,
+                { x: 40, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Staggered animations for grid items
+        gsap.utils.toArray('.problem-grid, .pricing-grid, .roi-grid, .maine-data-grid').forEach(grid => {
+            const items = grid.querySelectorAll('.stagger-item');
+            gsap.fromTo(items,
+                { y: 30, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: grid,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // FAQ stagger animation
+        gsap.utils.toArray('.faq-grid').forEach(grid => {
+            const items = grid.querySelectorAll('.stagger-item');
+            gsap.fromTo(items,
+                { y: 20, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: grid,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Counter animation for ROI section
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+
+            ScrollTrigger.create({
+                trigger: counter,
+                start: 'top 85%',
+                onEnter: () => {
+                    let start = 0;
+                    const startTime = performance.now();
+
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+                        counter.textContent = Math.round(easeProgress * target);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        }
+                    }
+
+                    requestAnimationFrame(updateCounter);
+                },
+                once: true
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('modalOverlay')) {
+                document.getElementById('modalOverlay').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Form Submission
+        function submitForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('demoForm');
+            const formData = new FormData(form);
+
+            // Basic validation
+            const email = formData.get('email');
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Simulate submission
+            alert('Thank you! We\'ll be in touch within 24 hours to schedule your pilot kickoff.');
+            closeModal();
+            form.reset();
+        }
+
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all other items
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+            // Toggle current item
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            }
+        });
+
+        // Hide scroll indicator on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                gsap.to('.scroll-indicator', { opacity: 0, duration: 0.3 });
+            }
+        });
+    </script>
+</body>
+</html>

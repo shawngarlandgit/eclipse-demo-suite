@@ -1,0 +1,214 @@
+{
+  "name": "CannaConnect Cold Email - Convex + Resend",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 15
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Daily 9:15am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://fiery-cheetah-41.convex.site/cold-email/due-prospects",
+        "options": {}
+      },
+      "id": "get-prospects",
+      "name": "Get Due Prospects",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [450, 300],
+      "typeVersion": 4.1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.count }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "id": "has-prospects",
+      "name": "Has Prospects?",
+      "type": "n8n-nodes-base.if",
+      "position": [650, 300],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "prospects",
+        "options": {}
+      },
+      "id": "split-prospects",
+      "name": "Split Prospects",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [850, 200],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build email body based on email number - Optimized 3-email sequence\nconst prospect = $input.item.json;\nconst emailNum = prospect.emailNumber;\n\nconst templates = {\n  1: `Hi there,\n\nI've spent the last 8 years managing software for Maine city and county governments — teaching public employees how to actually use the systems they're given.\n\nNow I've built something for cannabis. And I think it's really good.\n\nIt's called CannaConnect — a patient retention layer that sits on top of your existing POS. It integrates with what you already use, tracks what works for each patient, handles loyalty, and gives you real-time analytics. Not another system to replace. Just one that makes everything work better.\n\nThe kind of thing Dutchie charges $2,500/month for, built specifically for Maine operators.\n\nI'm picking 2 dispensaries to pilot this with.\n\nNormal: $2,500/month\nPilot: $1,000/month (locked in for 1 year)\nContract: None. 90 days, walk if it doesn't work.\n\nOne spot still open. Closes Friday 5pm.\n\nInterested?\n\nShawn Garland\nFounder, CannaConnect\nshawn@awakenedindustries.me\n207-705-7809\n\ncannaconnect.me — feel free to check it out\n\nP.S. I'm not VC-backed. I'm not trying to flip this to an MSO. I just want to build something that helps Maine dispensaries compete.`,\n\n  2: `${prospect.firstName},\n\nQuick note: closing pilot selection at 5pm today.\n\nOne Maine dispensary already took a spot.\n\nYou were next on my list.\n\nIf you want to chat before I close this out, just reply to this email.\n\nShawn`,\n\n  3: `Hi ${prospect.firstName},\n\nFilled the pilot spots last week.\n\nBut I'm launching an early-adopter cohort in February (same founder pricing, just expanding from 2 to 5 dispensaries).\n\nIf you want to be on the short list, let me know.\n\nShawn`\n};\n\nreturn {\n  prospectId: prospect._id,\n  to: prospect.email,\n  subject: prospect.subject,\n  body: templates[emailNum] || templates[1],\n  emailNumber: emailNum,\n  dispensaryName: prospect.dispensaryName\n};"
+      },
+      "id": "build-email",
+      "name": "Build Email",
+      "type": "n8n-nodes-base.code",
+      "position": [1050, 200],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "toEmail": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "additionalFields": {
+          "fromEmail": "shawn@awakenedai.online",
+          "fromName": "Shawn at CannaConnect",
+          "replyToEmail": "shawn@awakenedindustries.me"
+        }
+      },
+      "id": "send-resend",
+      "name": "Send via Resend",
+      "type": "n8n-nodes-base.resend",
+      "position": [1250, 200],
+      "typeVersion": 1,
+      "credentials": {
+        "resendApi": {
+          "id": "ResendApiCanna01",
+          "name": "Resend API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fiery-cheetah-41.convex.site/cold-email/record-sent",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prospectId",
+              "value": "={{ $('Build Email').item.json.prospectId }}"
+            },
+            {
+              "name": "emailNumber",
+              "value": "={{ $('Build Email').item.json.emailNumber }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $('Build Email').item.json.subject }}"
+            },
+            {
+              "name": "resendMessageId",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "record-sent",
+      "name": "Record in Convex",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1450, 200],
+      "typeVersion": 4.1
+    },
+    {
+      "parameters": {
+        "content": "## CannaConnect Cold Email Campaign\n\n### How it works:\n1. **Schedule**: Runs daily at 9:15am\n2. **Get Prospects**: Fetches prospects due for email from Convex\n3. **Build Email**: Generates personalized email based on sequence position\n4. **Send**: Sends via Resend API\n5. **Record**: Updates Convex with sent status\n\n### Setup Required:\n1. Add Resend API credentials\n2. Verify sender domain (cannaconnect.io)\n3. Import prospects into Convex\n4. Activate prospects to start sequence",
+        "height": 340,
+        "width": 380
+      },
+      "id": "note",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [250, 500],
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "Daily 9:15am": {
+      "main": [
+        [
+          {
+            "node": "Get Due Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Due Prospects": {
+      "main": [
+        [
+          {
+            "node": "Has Prospects?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Prospects?": {
+      "main": [
+        [
+          {
+            "node": "Split Prospects",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Prospects": {
+      "main": [
+        [
+          {
+            "node": "Build Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Email": {
+      "main": [
+        [
+          {
+            "node": "Send via Resend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send via Resend": {
+      "main": [
+        [
+          {
+            "node": "Record in Convex",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

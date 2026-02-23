@@ -1,0 +1,33 @@
+name: Mirror Patient App
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/patient-app/**'
+      - '.github/workflows/patient-app-mirror.yml'
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Split patient app subtree
+        run: |
+          git subtree split --prefix=apps/patient-app -b patient-app-split
+
+      - name: Push to eclipse-patient-app repo
+        env:
+          MIRROR_TOKEN: ${{ secrets.PATIENT_APP_MIRROR_TOKEN }}
+        run: |
+          if [ -z "$MIRROR_TOKEN" ]; then
+            echo "Missing PATIENT_APP_MIRROR_TOKEN secret."
+            exit 1
+          fi
+          git push --force "https://x-access-token:${MIRROR_TOKEN}@github.com/shawngarlandgit/eclipse-patient-app.git" patient-app-split:main
