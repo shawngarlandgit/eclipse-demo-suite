@@ -1,0 +1,314 @@
+/* ============================================
+   HERO SECTION (Home) — COIN SLOT DARK
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #0F0F14 0%,
+    #14141E 12%,
+    #1A1A24 25%,
+    #22222E 38%,
+    #2A2A38 48%,
+    #3D3020 58%,
+    #6B5020 68%,
+    #A07828 78%,
+    #D4A035 90%,
+    #E8BD5A 100%
+  );
+}
+
+/* Animated clouds — subtle gold/amber haze */
+.cloud {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+}
+.cloud-1 {
+  width: 400px; height: 160px;
+  background: rgba(212, 160, 53, 0.3);
+  top: 18%; left: -5%;
+  border-radius: 100px;
+  animation: cloudDrift 40s ease-in-out infinite;
+}
+.cloud-2 {
+  width: 300px; height: 120px;
+  background: rgba(232, 146, 43, 0.25);
+  top: 25%; right: -8%;
+  border-radius: 80px;
+  animation: cloudDrift 55s ease-in-out infinite reverse;
+}
+.cloud-3 {
+  width: 250px; height: 100px;
+  background: rgba(212, 160, 53, 0.2);
+  top: 35%; left: 15%;
+  border-radius: 60px;
+  animation: cloudDrift 45s ease-in-out infinite;
+  animation-delay: -15s;
+}
+.cloud-4 {
+  width: 350px; height: 140px;
+  background: rgba(232, 189, 90, 0.15);
+  top: 12%; right: 20%;
+  border-radius: 90px;
+  animation: cloudDrift 50s ease-in-out infinite;
+  animation-delay: -25s;
+}
+@keyframes cloudDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(80px); }
+}
+
+/* Logo in hero */
+.hero-logo {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2rem;
+  animation: logoReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: scale(0.8);
+}
+@keyframes logoReveal {
+  to { opacity: 1; transform: scale(1); }
+}
+.hero-logo svg {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 0 40px rgba(212, 160, 53, 0.5)) drop-shadow(0 0 80px rgba(232, 146, 43, 0.3));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+}
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: var(--white);
+  line-height: 0.95;
+  margin-bottom: 0.3em;
+  text-shadow:
+    0 2px 20px rgba(0,0,0,0.5),
+    0 0 60px rgba(212, 160, 53, 0.25);
+  animation: titleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+@keyframes titleUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-title span {
+  display: block;
+  font-size: 0.35em;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-top: 0.5em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-shadow: none;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: rgba(255,255,255,0.75);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  font-weight: 500;
+  animation: titleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: titleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* ============================================
+   HERO LANDSCAPE — DARK with gold/amber tones
+   ============================================ */
+.hero-landscape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35vh;
+  min-height: 220px;
+  max-height: 360px;
+  pointer-events: none;
+  z-index: 1;
+}
+.landscape-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.landscape-far {
+  animation: parallaxSlow 60s ease-in-out infinite alternate;
+}
+.landscape-mid {
+  animation: parallaxMed 45s ease-in-out infinite alternate;
+}
+.landscape-near {
+  animation: parallaxFast 35s ease-in-out infinite alternate;
+}
+@keyframes parallaxSlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-15px); }
+}
+@keyframes parallaxMed {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(10px); }
+}
+@keyframes parallaxFast {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-8px); }
+}
+
+/* Landscape SVG color overrides — dark tones with gold/amber accents */
+.landscape-far path,
+.landscape-far polygon {
+  fill: rgba(42, 42, 56, 0.6);
+}
+.landscape-mid path,
+.landscape-mid polygon {
+  fill: rgba(34, 34, 46, 0.8);
+}
+.landscape-near path,
+.landscape-near polygon {
+  fill: var(--dark-mid);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+.scroll-indicator svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0.5;
+  color: var(--gold-light);
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ============================================
+   PAGE HERO (Sub-pages) — DARK
+   ============================================ */
+.page-hero {
+  position: relative;
+  padding: 10rem 2rem 5rem;
+  text-align: center;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+}
+.page-hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.page-hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.page-hero .section-label {
+  color: var(--gold-light);
+}
+
+/* Page hero variants — dark gradients with gold/amber accents */
+.page-hero-company {
+  background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 30%, #2A2A38 60%, #3D3020 85%, #A07828 100%);
+}
+.page-hero-products {
+  background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 25%, #2A2A38 50%, #6B5020 75%, #D4A035 100%);
+}
+.page-hero-flower {
+  background: linear-gradient(135deg, #D4A035 0%, #A07828 25%, #3D3020 55%, #1A1A24 80%, #0F0F14 100%);
+}
+.page-hero-extracts {
+  background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 25%, #3D3020 55%, #A07828 80%, #E8BD5A 100%);
+}
+.page-hero-cbd {
+  background: linear-gradient(135deg, #22222E 0%, #2A2A38 30%, #3D3020 60%, #A07828 85%, #D4A035 100%);
+}
+.page-hero-merch {
+  background: linear-gradient(135deg, #0F0F14 0%, #22222E 30%, #6B5020 65%, #E8922B 100%);
+}
+.page-hero-pricing {
+  background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 25%, #2A2A38 50%, #A07828 80%, #D4A035 100%);
+}
+.page-hero-contact {
+  background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 35%, #3D3020 70%, #E8922B 100%);
+}
+.page-hero-deals .page-hero-content::before { background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 30%, #3D3020 70%, #A07828 100%); }
+.page-hero-faq .page-hero-content::before { background: linear-gradient(135deg, #0F0F14 0%, #1A1A24 40%, #2A2A38 70%, #333344 100%); }
+
+/* FAQ accordion */
+details[open] summary svg { transform: rotate(180deg); }
+details summary::-webkit-details-marker { display: none; }
+details summary::marker { display: none; }
+
+/* ============================================
+   WAVE DIVIDER
+   ============================================ */
+.wave-divider {
+  position: relative;
+  margin-top: -1px;
+  line-height: 0;
+}
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.wave-divider svg path {
+  fill: var(--dark-mid);
+}
+.wave-divider-flipped { transform: scaleY(-1); margin-bottom: -1px; margin-top: 0; }
+.wave-divider-flipped svg path {
+  fill: var(--dark);
+}
+
+@media (max-width: 768px) {
+  .page-hero { padding: 8rem 1.5rem 3.5rem; }
+}

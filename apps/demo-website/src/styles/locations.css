@@ -1,0 +1,104 @@
+/* ============================================
+   LOCATIONS SECTION — COIN SLOT DARK
+   ============================================ */
+.locations { background: var(--dark-mid); }
+.locations-header { text-align: center; margin-bottom: 4rem; }
+.locations-header .section-desc { margin: 0 auto; }
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+.location-card {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s, border-color 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+.location-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
+  border-color: rgba(212, 160, 53, 0.2);
+}
+.location-card-header {
+  padding: 2.5rem 2rem 0;
+  position: relative;
+}
+.location-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+.location-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+.location-card-body {
+  padding: 1.5rem 2rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.location-details-list {
+  flex: 1;
+}
+.location-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.location-detail-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(212, 160, 53, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.location-detail-icon svg { width: 18px; height: 18px; color: var(--gold); }
+.location-detail-text { font-weight: 500; font-size: 0.95rem; color: var(--text-body); line-height: 1.5; }
+.location-detail-text strong { color: var(--text-light); font-weight: 700; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.15rem; }
+.location-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 0.85rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.3s;
+  margin-top: auto;
+  align-self: flex-start;
+}
+.location-cta:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 160, 53, 0.35);
+}
+.location-cta svg { width: 16px; height: 16px; }
+
+@media (max-width: 768px) {
+  .locations-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+}

@@ -1,0 +1,192 @@
+/* ============================================
+   NAVIGATION — COIN SLOT DARK
+   ============================================ */
+.nav {
+  position: fixed;
+  top: var(--announce-h, 0px);
+  left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav.scrolled {
+  background: rgba(15, 15, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 0.75rem 2.5rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.nav-logo svg { height: 42px; width: auto; }
+.nav.scrolled .nav-logo svg { height: 34px; }
+.nav-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-light);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold-light); }
+
+/* Mobile nav */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 5px;
+}
+.nav-hamburger span {
+  width: 26px;
+  height: 2.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--dark);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--gold-light); }
+.mobile-menu a.active { color: var(--gold-light); }
+.mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: none;
+  font-size: 2rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+/* Announcement Bar */
+.announcement-bar {
+  background: var(--gold-deep);
+  color: var(--dark);
+  text-align: center;
+  padding: 0.5rem 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  overflow: hidden;
+}
+.announcement-bar.hidden { display: none; }
+.announcement-messages { position: relative; height: 1.2em; }
+.announcement-msg {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.announcement-msg.active { opacity: 1; }
+.announcement-msg a { color: var(--dark); text-decoration: underline; }
+.announcement-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: var(--dark);
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  border: none;
+  padding: 0.25rem;
+}
+.announcement-close:hover { opacity: 1; }
+
+/* Nav CTA Button */
+.nav-cta {
+  background: var(--gold);
+  color: var(--dark);
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(212, 160, 53, 0.3);
+}
+.mobile-cta {
+  background: var(--gold) !important;
+  color: var(--dark) !important;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem !important;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav { padding: 1rem 1.5rem; }
+  .nav-cta { display: none; }
+  .announcement-bar { padding: 0.5rem 2.5rem 0.5rem 1rem; font-size: 0.75rem; }
+}

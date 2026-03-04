@@ -1,0 +1,108 @@
+/* ============================================
+   CONTACT PAGE — COIN SLOT DARK
+   ============================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Contact form — dark card */
+.contact-form-wrapper {
+  background: var(--dark-card);
+  border-radius: 24px;
+  padding: 3rem;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.contact-form-wrapper .section-title {
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  border: 2px solid var(--dark-surface);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-light);
+  background: var(--dark-mid);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 160, 53, 0.15);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+/* Contact info sidebar — dark card */
+.contact-info .section-title {
+  margin-bottom: 1.5rem;
+}
+.contact-info-card {
+  background: var(--dark-card);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.contact-info-card .location-detail {
+  margin-bottom: 1.5rem;
+}
+.contact-info-card .location-detail:last-child {
+  margin-bottom: 0;
+}
+.contact-info-card .location-detail-text a {
+  color: var(--gold);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.contact-info-card .location-detail-text a:hover {
+  color: var(--gold-light);
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-form-wrapper { padding: 2rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}

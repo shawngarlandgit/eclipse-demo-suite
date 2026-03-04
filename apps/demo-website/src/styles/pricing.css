@@ -1,0 +1,443 @@
+/* ============================================
+   PRICING PAGE — COIN SLOT DARK
+   ============================================ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.pricing-card {
+  background: var(--dark-card);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s, border-color 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
+  border-color: rgba(212, 160, 53, 0.2);
+}
+.pricing-card-header {
+  padding: 2rem;
+  text-align: center;
+  color: var(--white);
+}
+.pricing-card-header.gradient-flower { background: linear-gradient(135deg, #3D3020, #6B5020, #D4A035); }
+.pricing-card-header.gradient-extracts { background: linear-gradient(135deg, #1A1A24, #2A2A38, #A07828); }
+.pricing-card-header.gradient-cbd { background: linear-gradient(135deg, #22222E, #3D3020, #E8BD5A); }
+.pricing-card-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.pricing-card-header p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+.pricing-card-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pricing-card-cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+/* Price rows — dark dividers */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--dark-border);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+.price-row:last-child { border-bottom: none; }
+.price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+
+/* Pricing features — gold check icons */
+.pricing-features { margin-top: 1.5rem; }
+.pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+.pricing-feature svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+
+/* Pricing notice — dark surface bg */
+.pricing-notice {
+  background: var(--dark-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--dark-border);
+}
+.pricing-notice p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.pricing-cta { text-align: center; margin-top: 4rem; }
+
+/* ============================================
+   MENU TABS (Flower / Extracts pages) — DARK
+   ============================================ */
+.menu-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.menu-tab {
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--dark-card);
+  color: var(--text-body);
+  border: 2px solid var(--dark-border);
+  transition: all 0.3s;
+}
+.menu-tab:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.menu-tab.active {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+
+/* Menu panels */
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+/* Menu card — dark card bg */
+.menu-card {
+  background: var(--dark-card);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.menu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem 0;
+}
+.menu-card-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--text-light);
+}
+.menu-updated {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.menu-notice {
+  padding: 1.5rem 2rem;
+}
+.menu-notice p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  font-weight: 500;
+  background: var(--dark-surface);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--dark-border);
+}
+.menu-pricing-grid {
+  padding: 0 2rem 2rem;
+}
+.menu-pricing-tier h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--dark-border);
+}
+.menu-section { margin-bottom: 2rem; }
+
+/* ============================================
+   QUICK PRICING BAR — DARK
+   ============================================ */
+.menu-pricing-quick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: var(--dark-card);
+  border-radius: 50px;
+  max-width: 600px;
+  margin: 1.5rem auto 2.5rem;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-body);
+  flex-wrap: wrap;
+}
+.menu-pricing-quick strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 1rem;
+}
+.pricing-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dark-surface);
+}
+
+/* ============================================
+   STRAIN GRID — DARK
+   ============================================ */
+.strain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0 2rem 1rem;
+}
+.strain-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--dark-border);
+}
+.strain-item:nth-child(odd) {
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--dark-border);
+}
+.strain-item:nth-child(even) {
+  padding-left: 1.5rem;
+}
+.strain-info {
+  flex: 1;
+  min-width: 0;
+}
+.strain-name {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 0.15rem;
+}
+.strain-genetics {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.strain-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+.strain-type {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.1rem;
+}
+.strain-thc {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* ============================================
+   WEEKLY DEALS — DARK with gold accents
+   ============================================ */
+.weekly-deals {
+  padding: 2rem;
+  border-top: 2px solid var(--dark-border);
+}
+.weekly-deals h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.deals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.deal-card {
+  background: linear-gradient(135deg, var(--dark-surface), var(--dark-card));
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--dark-border);
+}
+.deal-price {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.deal-card strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+.deal-card span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.deal-type {
+  margin-top: 0.4rem;
+  font-size: 0.75rem !important;
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================
+   CONCENTRATE ITEMS — DARK
+   ============================================ */
+.concentrate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0 2rem 1rem;
+}
+.concentrate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--dark-border);
+}
+.concentrate-item:nth-child(odd) {
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--dark-border);
+}
+.concentrate-item:nth-child(even) {
+  padding-left: 1.5rem;
+}
+.concentrate-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+.concentrate-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================
+   MENU TIER HEADERS — DARK
+   ============================================ */
+.menu-tier-header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-light);
+  padding: 1rem 2rem 0.5rem;
+  margin-top: 0.5rem;
+  border-bottom: 2px solid var(--dark-border);
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.tier-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* ============================================
+   MENU LEGEND — DARK
+   ============================================ */
+.menu-legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--dark-border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.menu-legend strong {
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .menu-tab { padding: 0.6rem 1.4rem; font-size: 0.8rem; }
+  .strain-grid,
+  .concentrate-grid { grid-template-columns: 1fr; }
+  .strain-item:nth-child(odd),
+  .concentrate-item:nth-child(odd) {
+    padding-right: 0;
+    border-right: none;
+  }
+  .strain-item:nth-child(even),
+  .concentrate-item:nth-child(even) {
+    padding-left: 0;
+  }
+  .deals-grid { grid-template-columns: 1fr; }
+  .menu-pricing-quick { flex-direction: column; gap: 0.5rem; border-radius: 16px; }
+  .pricing-dot { display: none; }
+}
